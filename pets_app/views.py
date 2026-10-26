@@ -33,12 +33,12 @@ def pet_list(request):
     return render(request, 'pets_app/pet_list.html', {'pets': pets})
 
 
-
+@login_required
 def pet_detail(request, pk):
     pet = get_object_or_404(Pet, pk=pk)
     return render(request, 'pets_app/pet_detail.html', {'pet': pet})
 
-
+@login_required
 def pet_create(request):
     if request.method == 'POST':
         form = PetForm(request.POST, request.FILES)
