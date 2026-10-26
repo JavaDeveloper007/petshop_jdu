@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+
+# Виртуальное окружение
+venv/
+venv_petshop/
+.venv/
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+
+# Секреты и настройки
+.env
+
+# IDE и система
+.vscode/
+.idea/
+.DS_Store

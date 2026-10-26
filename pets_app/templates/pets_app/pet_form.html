@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yangi hayvon</title>
+</head>
+<body>
+    <h1>Yangi hayvon qo'shish</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Saqlash</button>
+    </form>
+    <a href="{% url 'pet_list' %}">Orqaga</a>
+</body>
+</html>
+

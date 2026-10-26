@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Kirish{% endblock %}
+
+{% block content %}
+
+<h1 style="color: red;" >{{ title }}</h1>
+
+{% if messages %}
+    {% for message in messages %}<p style="color:red">{{ message }}</p>{% endfor %}
+{% endif %}
+
+{% if messages %}
+    {{ form.errors }}
+{% endif %}
+
+
+
+<form method="post">
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+        <div style="color: red;">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+                Чужак! Логин или пароль неверный, ты не из наших!
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <p>{{ form.username.label_tag }} {{ form.username }}</p>
+    <p>{{ form.password.label_tag }} {{ form.password }}</p>
+    <button type="submit">Kirish</button>
+</form>
+
+<a href="{% url 'accounts:register' %}">Akkauntingiz yoqmi? yarating</a>
+
+
+{% endblock %}

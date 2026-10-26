@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Petshop{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar__inner">
+            <a href="{% url 'pet_list' %}" class="brand">
+                <img src="{% static 'images/jdu_logo.png' %}" alt="JDU logo">
+                <span>Petshop</span>
+            </a>
+
+            <nav class="navbar__right">
+                {% if user.is_authenticated %}
+                    <span class="hello">Salom, <strong>{{ user.username }}</strong></span>
+                    <form method="post" action="{% url 'accounts:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn--ghost">Chiqish</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" class="btn btn--ghost">Kirish</a>
+                    <a href="{% url 'accounts:register' %}" class="btn">Ro'yxatdan o'tish</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>&copy; JDU Django kursi</p>
+    </footer>
+</body>
+</html>
